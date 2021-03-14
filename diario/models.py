@@ -16,7 +16,7 @@ class Perfil(models.Model):
 
 class Diario(models.Model):
 
-    brm = models.ForeignKey(Perfil, on_delete=mdoels.CASCADE)
+    brm = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     temperatura = models.CharField(max_length=5)
     tos = models.BooleanField(default=False)
     cabeza = models.BooleanField(default=False)
