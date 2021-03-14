@@ -11,6 +11,8 @@ class Perfil(models.Model):
     ciudad = models.CharField(max_length=40)
     es_gerente = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.nombre
 
 class Diario(models.Model):
 
@@ -22,3 +24,6 @@ class Diario(models.Model):
     restriado = models.BooleanField(default=False)
     malestar_general = models.BooleanField(default=False)
     respirar = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.brm.nombre
