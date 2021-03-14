@@ -1,3 +1,4 @@
 from django.contrib import admin
+from diario.models import Perfi
 
-# Register your models here.
+admin.site.register(Perfil)
