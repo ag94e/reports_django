@@ -15,7 +15,7 @@ class Perfil(models.Model):
         verbose_name_plural = 'Perfiles'
 
     def __str__(self):
-        return self.nombre
+        return f'{self.nombre} {self.brm}'
 
 class Diario(models.Model):
 
