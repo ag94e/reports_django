@@ -9,13 +9,13 @@ class Perfil(models.Model):
     sucursal = models.CharField(max_length=40)
     estado = models.CharField(max_length=40)
     ciudad = models.CharField(max_length=40)
-    es_gerente = models.BooleanField(default=False)
+    es_gerente = models.BooleanField(default=False, blank=True)
 
     class Meta:
         verbose_name_plural = 'Perfiles'
 
     def __str__(self):
-        return f'{self.nombre} {self.brm}'
+        return f'{self.brm} {self.nombre}'
 
 class Diario(models.Model):
 

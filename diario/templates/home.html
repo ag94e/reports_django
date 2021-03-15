@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+    Limpieza
+{% endblock %}
+{% block navbar%}{% include 'navbar.html' %}{% endblock %}
+{% block body_content %}
+    <div class="container">
+       <div class="row">
+            <div class="col-12 col-md-6 offset-md-1">
+                <h4>Reporte diario</h4>
+            </div>
+            <div class="col-12 col-md-5">
+                <h5> Fecha:<i>{{ today }}</i></h5>
+            </div>
+       </div>
+    </div>
+    <div class="container" style="background-color: grey;">
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <form method="post">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
