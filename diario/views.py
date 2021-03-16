@@ -1,3 +1,11 @@
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template import context
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+
 from django.shortcuts import render, redirect
 from .forms import PerfilForm, DiarioForm
 from .models import Perfil, Diario, DiarioPorFecha
@@ -75,4 +83,31 @@ def agregar_perfil(request):
     return render(request, 'agregar_perfil.html')
 
 def ver_reportes(request):
-    return render(request, 'reporte.html')
+    obj = DiarioPorFecha.objects.all()
+    context = {
+        'obj': obj
+    }
+    return render(request, 'reporte.html', context)
+
+
+def generar_reporte(request, id):
+    if request.method == 'GET':
+        obj = DiarioPorFecha.objects.get(id=id)
+        data = obj.fecha
+        obj_persona = Diario.objects.filter(fecha=data)
+        context = {
+            'obj': obj,
+            'obj_persona': obj_persona
+        }
+        try:
+            template = get_template('reporte_pdf.html')
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            pisaStatus = pisa.CreatePDF(html,dest=response)
+            return response
+
+        except:
+            context = {
+                'message': 'Hubo un error al intentar generar el reporte',
+            }
+            return render(request, 'reporte.html', context)

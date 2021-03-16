@@ -26,12 +26,12 @@ class PerfilForm(forms.ModelForm):
 
 class DiarioForm(forms.ModelForm):
     brm = forms.ModelChoiceField(queryset=Perfil.objects.all(), widget=forms.Select(attrs={'class':'form-control'}), label="Colaborador")
-    tos = forms.BooleanField(required=False, label='¿Tos?', initial=False)
-    cabeza = forms.BooleanField(required=False, label='Dolor de cabeza?', initial=False)
-    garganta = forms.BooleanField(required=False, label='¿Dolor de garganta?', initial=False)
-    resfriado = forms.BooleanField(required=False, label='¿Resfriado?', initial=False)
-    malestar_general = forms.BooleanField(required=False, label='¿Malestar en general?', initial=False)
-    respirar = forms.BooleanField(required=False, label='¿Dificultad para respirar?', initial=False)
+    tos = forms.ChoiceField(required=False, label='¿Tos?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
+    cabeza = forms.ChoiceField(required=False, label='Dolor de cabeza?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
+    garganta = forms.ChoiceField(required=False, label='¿Dolor de garganta?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
+    resfriado = forms.ChoiceField(required=False, label='¿Resfriado?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
+    malestar_general = forms.ChoiceField(required=False, label='¿Malestar en general?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
+    respirar = forms.ChoiceField(required=False, label='¿Dificultad para respirar?', initial=False, choices=(('Si', 'Si'), ('No', 'No')), widget=forms.RadioSelect)
 
     class Meta:
         model = Diario
