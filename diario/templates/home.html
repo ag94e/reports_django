@@ -4,21 +4,65 @@
 {% endblock %}
 {% block navbar%}{% include 'navbar.html' %}{% endblock %}
 {% block body_content %}
+{% if message_1 %}
+    <div class="container">
+        <div class="alert alert-danger" role="alert">
+            {{ message_1 }}
+        </div>
+    </div>
+    {% elif message_2 %}
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+            {{ message_2 }}
+        </div>
+    </div>
+{% endif %}
     <div class="container">
        <div class="row">
-            <div class="col-12 col-md-6 offset-md-1">
+            <div class="col-12 col-md-5 offset-md-1 text-center">
                 <h4>Reporte diario</h4>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-4">
                 <h5> Fecha:<i>{{ today }}</i></h5>
+            </div>
+            <div class="col-12 col-md-2">
+                <a class="btn btn-success btn-block" href="{% url 'reporte' %}">Reportes</a>
             </div>
        </div>
     </div>
-    <div class="container" style="background-color: grey;">
+    <div class="container">
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2">
                 <form method="post">
-                    
+                    {% csrf_token %}
+                    <div class="container border">
+                        {% if gerentes %}
+                        <label> Gerente: </label>
+                            <select name="gerente" class="form-control">
+                                {% for g in gerentes %}
+                                    <option value="{{ g.brm }}">{{ g }}</option>
+                                {% endfor %}
+                            </select><br>
+                        {% endif %} <br>
+                    </div><br>
+                    <div class="container border">
+                        {% if diario %}
+                            {% for field in diario %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        {% for e in field.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ e }}
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>  
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block my-5">Guardar</button>
                 </form>
             </div>
         </div>

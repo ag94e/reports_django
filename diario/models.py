@@ -19,18 +19,15 @@ class Perfil(models.Model):
 
 class Diario(models.Model):
 
-    respuestas = [
-        ('SI', 'SI'),
-        ('NO', 'NO')
-    ]
     brm = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     temperatura = models.CharField(max_length=5)
-    tos = models.CharField(max_length=2, choices=respuestas, default=None)
-    cabeza = models.CharField(max_length=2, choices=respuestas, default=None)
-    garganta = models.CharField(max_length=2, choices=respuestas, default=None)
-    restriado = models.CharField(max_length=2, choices=respuestas, default=None)
-    malestar_general = models.CharField(max_length=2, choices=respuestas, default=None)
-    respirar = models.CharField(max_length=2, choices=respuestas, default=None)
+    tos = models.BooleanField(default=False)
+    cabeza = models.BooleanField(default=False)
+    garganta = models.BooleanField(default=False)
+    resfriado = models.BooleanField(default=False)
+    malestar_general = models.BooleanField(default=False)
+    respirar = models.BooleanField(default=False)
+    fecha = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.brm.nombre
